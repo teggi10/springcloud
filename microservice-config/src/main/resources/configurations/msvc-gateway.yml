@@ -14,10 +14,14 @@ spring:
           uri: 'http://localhost:8090'
           predicates:
             - Path=/api/student/**
+          filters:
+            - AddRequestHeader=X-GATEWAY-SECRET, mateo-123
         - id: courses
           uri: 'http://localhost:9090'
           predicates:
             - Path=/api/course/**
+          filters:
+            - AddRequestHeader=X-GATEWAY-SECRET, mateo-123
 eureka:
   client:
     register-with-eureka: false

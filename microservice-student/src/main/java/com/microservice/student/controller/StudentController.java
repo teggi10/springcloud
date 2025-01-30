@@ -21,7 +21,7 @@ public class StudentController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> findById(){
+    public ResponseEntity<?> findAll(){
         return ResponseEntity.ok(studentService.findAll());
     }
 
