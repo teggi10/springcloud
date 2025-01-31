@@ -1,19 +1,15 @@
 server:
-  port: 8090
+  port: 8082
 
 spring:
   application:
-    name: msvc-student
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3307/studentDb
-    username: root
-   # password: 150919
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
+    name: msvc-aws
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  destination:
+    folder: src/main/resources/static/
   activemq:
     #in-memory: true
     #broker-url: vm://localhost?broker.persistent=false
@@ -22,14 +18,19 @@ spring:
     user: admin
     password: admin
     in-memory: false
-  security:
-    enabled: false
-  
+
+aws:
+  region: us-east-1
+  access:
+    key: xxx
+  secret:
+    key: xxx
+
 messaging:
   consumer-id: ${spring.application.name}
   consumers:
     queues:
-      msvc-student: VirtualTopic.msvc.student
+      msvc-aws-s3: VirtualTopic.msvc.aws.s3
   producers:
     topics:
       msvc-student: VirtualTopic.msvc.student

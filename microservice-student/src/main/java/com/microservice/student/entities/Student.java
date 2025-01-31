@@ -1,5 +1,7 @@
 package com.microservice.student.entities;
 
+import com.thoughtworks.xstream.converters.basic.StringConverter;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,12 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
     private String email;
+
+    @Lob
+    @ToString.Exclude
+    @Column(name = "file_data")
+    private String fileData;
+    
 
     @Column(name = "course_id")
     private Long courseId;

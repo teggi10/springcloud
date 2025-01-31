@@ -21,13 +21,13 @@ public class GatewayHeaderFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws java.io.IOException, ServletException {
-        String gatewaySecret = request.getHeader("X-GATEWAY-SECRET");
+       /*  String gatewaySecret = request.getHeader("X-GATEWAY-SECRET");
         log.info("Invalid gateway secret: {}", gatewaySecret);
         if (!EXPECTED_SECRET.equals(gatewaySecret)) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
             return;
         }
-        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response); */
     }
 
 }

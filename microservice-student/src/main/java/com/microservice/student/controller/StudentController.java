@@ -1,5 +1,6 @@
 package com.microservice.student.controller;
 
+import com.microservice.student.controller.contracts.StudentRequest;
 import com.microservice.student.entities.Student;
 import com.microservice.student.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class StudentController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveStudent(@RequestBody Student student){
+    public void saveStudent(@RequestBody StudentRequest student){
         studentService.save(student);
     }
 
