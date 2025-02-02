@@ -1,5 +1,36 @@
 spring:
   application:
     name: msvc-student
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3307/studentDb
+      username: root
+    # password: 150919
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    open-in-view: false
+  activemq:
+    #in-memory: true
+    #broker-url: vm://localhost?broker.persistent=false
+    #broker-url: tcp://172.31.94.21:51616
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    in-memory: false
+  security:
+    enabled: false
   config:
     import: optional:configserver:http://localhost:8888
+  
+messaging:
+  consumer-id: ${spring.application.name}
+  consumers:
+    queues:
+      msvc-student: VirtualTopic.msvc.student
+  producers:
+    topics:
+      msvc-student: VirtualTopic.msvc.student
+      msvc-aws-s3: VirtualTopic.msvc.aws.s3
