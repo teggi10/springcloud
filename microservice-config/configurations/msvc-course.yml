@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: msvc-course
+
+datasource:
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://students-database:3306/coursesDb
+  username: root
+  password: root
+
+jpa:
+  hibernate:
+    ddl-auto: update
+  database: mysql
+  database-platform: org.hibernate.dialect.MySQLDialect
+  open-in-view: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka

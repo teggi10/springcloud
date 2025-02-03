@@ -9,8 +9,10 @@ services:
       - "8888:8888"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - config
+    volumes:
+      - ./configurations:/configurations
+
+
   eureka:
     build:
       context: ./microservice-eureka
@@ -21,6 +23,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - config
+
 
   gateway:
     build:
@@ -41,10 +44,12 @@ services:
       - "8090:8090"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/studentsdb
     depends_on:
       - eureka
-      - database
+      - config
+      - activemq
+      - students-database
+
 
   course:
     build:
@@ -54,10 +59,10 @@ services:
       - "9090:9090"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/coursesdb
     depends_on:
       - eureka
-      - database
+      - config
+      - courses-database
 
   aws:
     build:
@@ -67,17 +72,33 @@ services:
       - "8081:8081"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - AWS_ACCESS_KEY=xxx
+      - AWS_SECRET_KEY=xxx
+      - AWS_REGION=us-east-1
     depends_on:
       - eureka
+      - activemq
+      - config
 
-  database:
+
+  students-database:
     image: mysql:8.0
-    container_name: mysql-database
+    container_name: students-database
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: coursesdb
+      MYSQL_DATABASE: studentDb
+
+
+  courses-database:
+    image: mysql:8.0
+    container_name: courses-database
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: coursesDb
 
   activemq:
     image: rmohr/activemq
