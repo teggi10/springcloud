@@ -21,7 +21,7 @@ spring:
     in-memory: false
 
   config:
-    import: optional:configserver:http://config-server:8888
+    import: configserver:http://config-server:8888
 
 messaging:
   consumer-id: ${spring.application.name}

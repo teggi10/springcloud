@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: microservice-config
+    name: msvc-config
   profiles:
     active: native
   cloud:
